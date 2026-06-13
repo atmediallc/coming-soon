@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nova | The Next Generation Workspace",
-  description: "Join the exclusive waitlist for Nova, the next generation of workspace intelligence.",
+  title: "TraderAdd | The Next Generation Workspace",
+  description: "Join the exclusive waitlist for TraderAdd, the next generation of workspace intelligence.",
 };
 
 export default function RootLayout({
