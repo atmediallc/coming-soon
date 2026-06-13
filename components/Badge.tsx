@@ -13,7 +13,10 @@ export function Badge({ children, className }: BadgeProps) {
         className
       )}
     >
-      <span className="mr-1.5 flex h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+      <span
+        className="mr-1.5 flex h-1.5 w-1.5 rounded-full bg-accent animate-pulse"
+        aria-hidden="true"
+      />
       {children}
     </div>
   );

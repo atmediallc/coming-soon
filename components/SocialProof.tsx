@@ -1,43 +1,72 @@
-import { SITE_CONFIG } from "@/lib/constants";
+import { AUDIENCE_PROFILES } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+
+// Static CSS icon shapes — no external assets
+const ICONS: Record<string, React.ReactNode> = {
+  chart: (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
+      <path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M7 16l4-4 4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  shield: (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  users: (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  target: (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="6" />
+      <circle cx="12" cy="12" r="2" />
+    </svg>
+  ),
+};
 
 export function SocialProof() {
   return (
-    <section className="py-20 border-y border-white/5 bg-white/[0.01]">
+    <section className="py-20 border-y border-white/5 bg-white/[0.01]" aria-labelledby="audience-heading">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center text-center space-y-10">
-          <p className="text-sm font-bold text-white/30 uppercase tracking-[0.3em]">
-            Targeted at peak performance operators
-          </p>
-          
-          <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-10 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-             {/* Abstract CSS Logos */}
-             <div className="flex items-center space-x-3 group">
-               <div className="h-6 w-6 border-2 border-white rounded-sm group-hover:border-accent transition-colors" />
-               <span className="font-bold text-lg text-white tracking-tighter">DISCRETIONARY</span>
-             </div>
-             
-             <div className="flex items-center space-x-3 group">
-               <div className="h-6 w-6 bg-white rounded-full group-hover:bg-accent transition-colors" />
-               <span className="font-bold text-lg text-white tracking-tighter">FUNDED LABS</span>
-             </div>
-             
-             <div className="flex items-center space-x-3 group">
-               <div className="h-0 w-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-b-[20px] border-b-white group-hover:border-b-accent transition-colors" />
-               <span className="font-bold text-lg text-white tracking-tighter">QUANT TEAMS</span>
-             </div>
-             
-             <div className="flex items-center space-x-3 group">
-               <div className="relative h-6 w-6">
-                 <div className="absolute inset-0 border-2 border-white rounded-sm group-hover:border-accent" />
-                 <div className="absolute top-1 left-1 h-4 w-4 bg-white group-hover:bg-accent" />
-               </div>
-               <span className="font-bold text-lg text-white tracking-tighter">PERFORMANCE COACHES</span>
-             </div>
+        <div className="flex flex-col items-center text-center space-y-12">
+
+          <div className="space-y-4">
+            <p className="text-xs font-bold text-white/25 uppercase tracking-[0.35em]">
+              Who this is for
+            </p>
+            <h2 id="audience-heading" className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+              Built for process-driven traders.
+            </h2>
+            <p className="text-muted text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+              For discretionary traders, funded account traders, trading teams, and
+              performance-focused operators who want a clearer review workflow.
+            </p>
           </div>
-          
-          <p className="text-muted text-sm max-w-2xl font-medium leading-relaxed italic">
-            &quot;{SITE_CONFIG.socialProof}&quot;
-          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-4xl">
+            {AUDIENCE_PROFILES.map((profile) => (
+              <div
+                key={profile.label}
+                className={cn(
+                  "glass rounded-2xl p-5 text-left",
+                  "border border-white/5 hover:border-white/10 transition-colors duration-300"
+                )}
+              >
+                <div className="h-9 w-9 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-4">
+                  {ICONS[profile.icon]}
+                </div>
+                <h3 className="text-sm font-semibold text-white mb-1.5">{profile.label}</h3>
+                <p className="text-xs text-white/45 leading-relaxed">{profile.description}</p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

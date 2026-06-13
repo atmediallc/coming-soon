@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TraderAdd | The Next Generation Workspace",
-  description: "Join the exclusive waitlist for TraderAdd, the next generation of workspace intelligence.",
+  title: "TraderAdd | The intelligent trading journal",
+  description:
+    "TraderAdd helps traders journal, review, analyze and improve their trading process with analytics, charts and AI-powered insights.",
 };
 
 export default function RootLayout({

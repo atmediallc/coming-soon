@@ -1,73 +1,177 @@
 export const SITE_CONFIG = {
-  name: "TraderAdd",
-  tagline: "Your trading performance, finally organized.",
-  description: "The intelligent trading journal built for serious, process-driven traders. Review every trade, analyze patterns, and professionalize your workflow with AI-powered insights.",
-  badge: "Coming soon",
-  waitlistTitle: "Join the professional circle",
-  waitlistSubtitle: "Get early access to the platform that turns data into discipline.",
-  waitlistSuccess: "You're on the list. We'll be in touch.",
-  socialProof: "Built for discretionary traders, funded account professionals, and performance-focused operators.",
+  productName: "TraderAdd",
+  badge: "Private beta · Limited seats",
+  headline: "The trading journal that thinks with you.",
+  subheadline:
+    "TraderAdd brings your trades, journals, charts, analytics and AI reviews into one workflow so you can understand your process with more clarity.",
+  cta: "Request Access",
+  privacyNote: "No spam. Product updates only.",
+  waitlistMomentum: "Built for process-driven traders joining the private beta.",
+  successMessage: "You're in. We'll reach out when your spot opens.",
+  errorMessage: "Enter a valid email to request access.",
+  loadingMessage: "Requesting...",
+  disclaimer: "TraderAdd is not financial advice. Trading involves risk.",
+  sampleDataDisclaimer: "Sample data for product preview only.",
   links: {
     twitter: "https://twitter.com/traderadd",
     linkedin: "https://linkedin.com/company/traderadd",
     contact: "mailto:hello@traderadd.com",
   },
-  disclaimer: "TraderAdd is not financial advice. Trading involves risk.",
+};
+
+export const LAUNCH_CONFIG = {
+  enabled: true,
+  targetDate: "2026-09-01",
+  launchLabel: "Private beta opens",
+  launchWindow: "Q3 2026",
+  capacityLabel: "Limited early access",
+  progressLabel: "Beta access preparation",
+  progressPercent: 62,
+  openStateLabel: "Private beta is opening now.",
+};
+
+export const MOCKUP_DATA = {
+  netPnL: "+$12,450",
+  winRate: "68.5%",
+  profitFactor: "2.4",
+  rMultiple: "+1.8R",
+  tradesReviewed: "142",
+  reviewScore: "A−",
+  aiInsight:
+    "Your best trades share the same pattern: planned entry, controlled risk, and post-trade notes completed within 24 hours.",
+  journalQuality: "High",
+  backtestWinRate: "71.2%",
+  backtestSharpe: "1.94",
+  calendarStreak: "12-day streak",
 };
 
 export const FEATURES = [
+  // Journal & Review
   {
+    category: "journal",
     title: "Trade Journal",
-    description: "Capture the context behind every trade. Log emotions, setups, and execution details in a high-performance interface.",
+    description:
+      "Capture entries, exits, notes, emotions, mistakes, and trade context in one structured workflow.",
     icon: "book",
   },
   {
+    category: "journal",
     title: "AI Trade Reviews",
-    description: "Our AI workflow coach analyzes your entries and exits to identify behavioral patterns and discipline leaks.",
+    description:
+      "Turn each completed trade into a clearer review with signals, patterns, and next-step coaching.",
     icon: "brain",
+    featured: true,
   },
   {
+    category: "journal",
+    title: "Workflow Coach",
+    description:
+      "A structured process to maintain peak performance and avoid overtrading or revenge trading.",
+    icon: "target",
+  },
+  // Analytics & Charts
+  {
+    category: "analytics",
     title: "Performance Analytics",
-    description: "Advanced metrics that go beyond P&L. Track expectancy, drawdowns, and distribution of returns like a quant.",
+    description:
+      "Track your performance by setup, symbol, session, risk profile, and behavior patterns.",
     icon: "bar-chart",
   },
   {
+    category: "analytics",
     title: "Advanced Charting",
-    description: "Deep integration with market data to overlay your trades directly on the charts for visual post-analysis.",
+    description:
+      "Review trades directly on chart context with entries, exits, risk levels, and price action.",
     icon: "candlestick-chart",
   },
   {
+    category: "analytics",
     title: "Calendar Intelligence",
-    description: "Visualize your performance streaks and pulse. Identify your best days and sessions with heat-mapped clarity.",
+    description:
+      "See your trading month through daily performance, review quality, streaks, and behavior signals.",
     icon: "calendar",
   },
+  // Risk & Systems
   {
+    category: "risk",
     title: "Backtesting & Simulator",
-    description: "Validate your edge. Practice your execution in a risk-free environment with professional-grade market replay.",
+    description:
+      "Test ideas, review scenarios, and study process quality before putting capital at risk.",
     icon: "activity",
   },
   {
+    category: "risk",
     title: "Risk & Discipline Tracking",
-    description: "Monitor your adherence to rules. Set personal limits and track your 'R-multiple' consistency across all accounts.",
+    description:
+      "Identify rule breaks, overtrading, risk drift, and patterns that affect decision quality.",
     icon: "shield-check",
   },
   {
+    category: "risk",
     title: "Market Data Integrations",
-    description: "Seamlessly sync trades from your favorite brokers and platforms. One source of truth for your entire operation.",
+    description:
+      "Connect market context into the review workflow without turning your journal into a spreadsheet.",
     icon: "database",
-  },
-  {
-    title: "Workflow Coach",
-    description: "A structured process to help you maintain peak performance and avoid overtrading or revenge trading.",
-    icon: "target",
   },
 ];
 
-export const MOCKUP_DATA = {
-  netPnL: "+$12,450.00",
-  winRate: "68.5%",
-  profitFactor: "2.4",
-  tradesReviewed: "142",
-  aiInsight: "Your win rate increases by 15% when you wait at least 30 minutes after market open.",
-  journalQuality: "High",
-};
+export const FEATURE_CATEGORIES = [
+  { key: "journal", label: "Journal & Review" },
+  { key: "analytics", label: "Analytics & Charts" },
+  { key: "risk", label: "Risk & Systems" },
+];
+
+export const PROCESS_STEPS = [
+  {
+    label: "Raw Trades",
+    description: "Import or log trades from any session",
+    color: "bg-white/8",
+  },
+  {
+    label: "Notes & Context",
+    description: "Add emotions, setups, and decision notes",
+    color: "bg-white/8",
+  },
+  {
+    label: "AI Review",
+    description: "Get pattern signals and behavior coaching",
+    color: "bg-accent/30",
+    highlighted: true,
+  },
+  {
+    label: "Metrics",
+    description: "Analytics across every dimension of performance",
+    color: "bg-white/8",
+  },
+  {
+    label: "Repeatable Process",
+    description: "A clearer trading workflow, every session",
+    color: "bg-emerald-500/20",
+    isOutput: true,
+  },
+];
+
+export const AUDIENCE_PROFILES = [
+  {
+    icon: "chart",
+    label: "Discretionary Traders",
+    description: "Who want to understand what's actually driving their results",
+  },
+  {
+    icon: "shield",
+    label: "Funded Account Traders",
+    description: "Who need discipline tracking and consistent review workflows",
+  },
+  {
+    icon: "users",
+    label: "Trading Teams",
+    description: "Who want shared review workflows and performance visibility",
+  },
+  {
+    icon: "target",
+    label: "Performance-Focused Operators",
+    description: "Who treat trading as a professional process, not a gamble",
+  },
+];
+
+export const CURRENT_YEAR = 2026;
