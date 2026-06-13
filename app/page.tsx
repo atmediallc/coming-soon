@@ -1,6 +1,8 @@
 import { Hero } from "@/components/Hero";
 import { Mockup } from "@/components/Mockup";
 import { Features } from "@/components/Features";
+import { Process } from "@/components/Process";
+import { SocialProof } from "@/components/SocialProof";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -15,6 +17,8 @@ export default function Home() {
       <div className="relative">
         <Hero />
         <Mockup />
+        <SocialProof />
+        <Process />
         <Features />
         <Footer />
       </div>

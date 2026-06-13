@@ -1,51 +1,54 @@
 import { SITE_CONFIG } from "@/lib/constants";
-import { Send, Globe, Mail } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 border-t border-white/5 bg-black/50 backdrop-blur-md">
+    <footer className="py-12 border-t border-white/5 bg-black/50 backdrop-blur-sm">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-          <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-lg bg-white flex items-center justify-center font-bold text-black text-xl">
-              {SITE_CONFIG.name[0]}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+          <div>
+            <div className="text-xl font-bold text-white mb-2 tracking-tighter">
+              TraderAdd
             </div>
-            <span className="font-bold text-xl tracking-tight">{SITE_CONFIG.name}</span>
+            <p className="text-sm text-muted max-w-xs">
+              Transforming raw trading data into a professional edge.
+            </p>
           </div>
           
-          <div className="text-sm text-white/40">
-            © {currentYear} {SITE_CONFIG.name} Inc. All rights reserved.
-          </div>
-          
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap gap-x-8 gap-y-4">
             <a 
               href={SITE_CONFIG.links.twitter} 
-              className="text-white/40 hover:text-white transition-colors"
-              target="_blank"
+              target="_blank" 
               rel="noopener noreferrer"
-              aria-label="Twitter"
+              className="text-sm text-muted hover:text-white transition-colors"
             >
-              <Send className="h-5 w-5" />
+              Twitter
             </a>
             <a 
               href={SITE_CONFIG.links.linkedin} 
-              className="text-white/40 hover:text-white transition-colors"
-              target="_blank"
+              target="_blank" 
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
+              className="text-sm text-muted hover:text-white transition-colors"
             >
-              <Globe className="h-5 w-5" />
+              LinkedIn
             </a>
             <a 
               href={SITE_CONFIG.links.contact} 
-              className="text-white/40 hover:text-white transition-colors"
-              aria-label="Contact Email"
+              className="text-sm text-muted hover:text-white transition-colors"
             >
-              <Mail className="h-5 w-5" />
+              Contact
             </a>
           </div>
+        </div>
+        
+        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <p className="text-[10px] md:text-xs text-white/30 font-medium uppercase tracking-[0.2em]">
+            &copy; {currentYear} TraderAdd. All rights reserved.
+          </p>
+          <p className="text-[10px] md:text-xs text-white/20 italic">
+            {SITE_CONFIG.disclaimer}
+          </p>
         </div>
       </div>
     </footer>
