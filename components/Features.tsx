@@ -25,6 +25,15 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   target: Target,
 };
 
+const FEATURES_BY_CATEGORY = FEATURE_CATEGORIES.map((cat) => ({
+  ...cat,
+  features: FEATURES.filter((f) => f.category === cat.key).map((feature) => ({
+    ...feature,
+    Icon: ICON_MAP[feature.icon] ?? Zap,
+    isFeatured: feature.featured === true,
+  })),
+}));
+
 export function Features() {
   return (
     <section
@@ -46,8 +55,7 @@ export function Features() {
       </div>
 
       <div className="space-y-16">
-        {FEATURE_CATEGORIES.map((cat) => {
-          const catFeatures = FEATURES.filter((f) => f.category === cat.key);
+        {FEATURES_BY_CATEGORY.map((cat) => {
           return (
             <div key={cat.key}>
               {/* Category label */}
@@ -60,9 +68,8 @@ export function Features() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {catFeatures.map((feature, index) => {
-                  const Icon = ICON_MAP[feature.icon] ?? Zap;
-                  const isFeatured = feature.featured === true;
+                {cat.features.map((feature, index) => {
+                  const { Icon, isFeatured } = feature;
 
                   return (
                     <article
