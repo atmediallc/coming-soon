@@ -6,7 +6,7 @@ const iterations = 100000;
 
 console.log("Warming up...");
 for (let i = 0; i < 1000; i++) {
-  renderToString(Process());
+  renderToString(React.createElement(Process));
 }
 
 console.log("Measuring...");
