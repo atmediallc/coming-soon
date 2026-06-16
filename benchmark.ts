@@ -12,7 +12,7 @@ for (let i = 0; i < 1000; i++) {
 console.log("Measuring...");
 const start = performance.now();
 for (let i = 0; i < iterations; i++) {
-  renderToString(Process());
+  renderToString(React.createElement(Process));
 }
 const end = performance.now();
 
