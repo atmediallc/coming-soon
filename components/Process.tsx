@@ -1,6 +1,9 @@
 import { PROCESS_STEPS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
+const PROCESS_STEPS_REGULAR = PROCESS_STEPS.filter((s) => !s.isOutput);
+const PROCESS_STEPS_OUTPUT = PROCESS_STEPS.filter((s) => s.isOutput);
+
 export function Process() {
   return (
     <section
@@ -52,7 +55,7 @@ export function Process() {
               <div className="absolute inset-0 bg-grid opacity-8 pointer-events-none" aria-hidden="true" />
 
               <ol className="relative flex flex-col space-y-5" aria-label="TraderAdd workflow steps">
-                {PROCESS_STEPS.filter((s) => !s.isOutput).map((step, i, arr) => (
+                {PROCESS_STEPS_REGULAR.map((step, i, arr) => (
                   <li key={step.label} className="flex items-start space-x-4 relative">
                     {/* Connector line */}
                     {i < arr.length - 1 && (
@@ -97,7 +100,7 @@ export function Process() {
                 </li>
 
                 {/* Output */}
-                {PROCESS_STEPS.filter((s) => s.isOutput).map((step) => (
+                {PROCESS_STEPS_OUTPUT.map((step) => (
                   <li key={step.label}>
                     <div className="glass p-5 rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.04] flex flex-col items-center text-center space-y-2">
                       <div className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-400">
