@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Badge } from "./Badge";
 import { WaitlistForm } from "./WaitlistForm";
@@ -10,6 +11,18 @@ export function Hero() {
       aria-labelledby="hero-headline"
     >
       <div className="container mx-auto px-4 relative z-10 text-center">
+        {/* Logo */}
+        <div className="flex justify-center mb-10 animate-fade-in-up">
+          <Image
+            src="/traderadd-dark.png"
+            alt="TraderAdd"
+            width={220}
+            height={60}
+            priority
+            className="h-12 w-auto md:h-14"
+          />
+        </div>
+
         <Badge className="mb-8">{SITE_CONFIG.badge}</Badge>
 
         <h1
