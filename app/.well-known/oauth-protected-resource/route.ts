@@ -1,8 +1,11 @@
-export async function GET() {
+import { NextRequest } from 'next/server';
+
+export async function GET(request: NextRequest) {
+  const origin = new URL(request.url).origin;
   const metadata = {
-    resource: "https://example.com/api",
+    resource: `${origin}/api`,
     authorization_servers: [
-      "https://example.com"
+      origin
     ],
     scopes_supported: ["read", "write"]
   };
