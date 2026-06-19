@@ -34,3 +34,8 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## DNS-AID Configuration
+
+To complete the AI agent discoverability setup, ensure you publish DNS for AI Discovery (DNS-AID) records under your domain.
+For example, publish `_index._agents.example.com` or `_a2a._agents.example.com` using ServiceMode `SVCB/HTTPS` records with `alpn` and endpoint parameters. Also sign the public discovery zone with DNSSEC.
