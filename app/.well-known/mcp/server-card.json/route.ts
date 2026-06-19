@@ -1,10 +1,13 @@
-export async function GET() {
+import { NextRequest } from 'next/server';
+
+export async function GET(request: NextRequest) {
+  const origin = new URL(request.url).origin;
   const metadata = {
     serverInfo: {
       name: "TraderAdd MCP Server",
       version: "1.0.0"
     },
-    endpoint: "https://example.com/mcp",
+    endpoint: `${origin}/mcp`,
     capabilities: {
       tools: true,
       resources: true,
