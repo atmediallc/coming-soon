@@ -5,8 +5,7 @@
 ▲ Next.js 16.2.9 (Turbopack)
 - Local:         http://localhost:3000
 - Network:       http://192.168.0.2:3000
-✓ Ready in 590ms
+✓ Ready in 536ms
 ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
 
-○ Compiling / ...
- GET / 200 in 6.8s (next.js: 4.2s, proxy.ts: 134ms, application-code: 2.5s)
+ POST /api/waitlist 200 in 1893ms (next.js: 461ms, application-code: 1433ms)
