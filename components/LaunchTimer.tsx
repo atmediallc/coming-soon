@@ -20,6 +20,8 @@ export function LaunchTimer() {
   const [days, setDays] = useState<number>(() => getDaysRemaining(LAUNCH_CONFIG.targetDate));
 
   useEffect(() => {
+    if (!LAUNCH_CONFIG.enabled) return;
+
     const interval = setInterval(() => {
       setDays(getDaysRemaining(LAUNCH_CONFIG.targetDate));
     }, 60000); // Check every minute
