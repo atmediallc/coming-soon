@@ -14,7 +14,14 @@ export function RightColumn() {
             <span className="text-[11px] text-white/50">Win rate</span>
             <span className="text-[11px] font-bold text-emerald-400 tabular-nums">{MOCKUP_DATA.backtestWinRate}</span>
           </div>
-          <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+          <div
+            className="h-1 w-full bg-white/5 rounded-full overflow-hidden"
+            role="meter"
+            aria-valuenow={parseFloat(MOCKUP_DATA.backtestWinRate)}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label="Backtest win rate"
+          >
             <div className="h-full bg-emerald-500/50 rounded-full" style={{ width: MOCKUP_DATA.backtestWinRate }} />
           </div>
           <div className="flex justify-between items-center">
