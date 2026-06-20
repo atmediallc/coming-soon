@@ -38,7 +38,7 @@ export function Mockup() {
           </span>
         </div>
 
-        <div className="flex" style={{ minHeight: "420px" }}>
+        <div className="flex min-h-[420px]">
 
           {/* ── Sidebar ── */}
           <Sidebar />

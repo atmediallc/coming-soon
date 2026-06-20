@@ -32,7 +32,7 @@ export function CenterColumn() {
     <div className="col-span-12 md:col-span-8 lg:col-span-6 flex flex-col gap-3">
 
       {/* Candlestick chart */}
-      <div className="flex-1 glass rounded-xl overflow-hidden relative border border-white/5" style={{ minHeight: "160px" }}>
+      <div className="flex-1 glass rounded-xl overflow-hidden relative border border-white/5 min-h-[160px]">
         <div className="absolute top-3 left-3.5 z-10" aria-hidden="true">
           <p className="text-[10px] font-semibold text-white/50 tracking-wide">Equity Curve · 90d</p>
         </div>
