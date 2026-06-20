@@ -20,7 +20,7 @@ export function StatsColumn() {
           <p className="text-[10px] text-white/40 font-medium uppercase tracking-widest">Win Rate</p>
           <p className="text-base font-bold text-white tabular-nums">{MOCKUP_DATA.winRate}</p>
         </div>
-        <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden" role="meter" aria-valuenow={68} aria-valuemin={0} aria-valuemax={100} aria-label="Win rate">
+        <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden" role="meter" aria-valuenow={parseFloat(MOCKUP_DATA.winRate)} aria-valuemin={0} aria-valuemax={100} aria-label="Win rate">
           <div className="h-full bg-accent rounded-full" style={{ width: MOCKUP_DATA.winRate }} />
         </div>
       </div>
