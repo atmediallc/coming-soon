@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LAUNCH_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -12,14 +12,21 @@ function getDaysRemaining(targetDate: string): number {
 }
 
 /**
- * We compute days remaining lazily using a ref initialised on first render.
- * This avoids calling setState inside a useEffect (ESLint react-hooks/set-state-in-effect),
- * and avoids hydration mismatch by gating rendering on client-only state via useState initialiser.
+ * We compute days remaining lazily using a useState initializer on first render.
+ * This avoids hydration mismatch by gating rendering on client-only state.
+ * A useEffect ensures the timer stays updated if the page is left open.
  */
 export function LaunchTimer() {
-  // useState initialiser runs once on the client, giving us a stable value
-  // without needing a useEffect + setState cycle.
-  const [days] = useState<number>(() => getDaysRemaining(LAUNCH_CONFIG.targetDate));
+  const [days, setDays] = useState<number>(() => getDaysRemaining(LAUNCH_CONFIG.targetDate));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDays(getDaysRemaining(LAUNCH_CONFIG.targetDate));
+    }, 60000); // Check every minute
+
+    return () => clearInterval(interval);
+  }, []);
+
   const isOpen = days === 0;
 
   if (!LAUNCH_CONFIG.enabled) return null;
