@@ -100,24 +100,24 @@ export function CenterColumn() {
           </span>
         </div>
         <div className="grid gap-0.5" style={{ gridTemplateColumns: "repeat(7, 1fr)" }} aria-hidden="true">
-          {CALENDAR_CELLS.map((intensity, i) => (
-            <div
-              key={i}
-              className="aspect-square rounded-sm"
-              style={{
-                backgroundColor:
-                  intensity === 0
-                    ? "rgba(255,255,255,0.04)"
-                    : intensity === 1
-                    ? "rgba(59,130,246,0.18)"
-                    : intensity === 2
-                    ? "rgba(59,130,246,0.35)"
-                    : intensity === 3
-                    ? "rgba(59,130,246,0.55)"
-                    : "rgba(59,130,246,0.75)",
-              }}
-            />
-          ))}
+          {CALENDAR_CELLS.map((intensity, i) => {
+            const colors = [
+              "rgba(255,255,255,0.04)",
+              "rgba(59,130,246,0.18)",
+              "rgba(59,130,246,0.35)",
+              "rgba(59,130,246,0.55)",
+              "rgba(59,130,246,0.75)",
+            ];
+            return (
+              <div
+                key={i}
+                className="aspect-square rounded-sm"
+                style={{
+                  backgroundColor: colors[intensity] || colors[0],
+                }}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
