@@ -25,11 +25,24 @@ export function WaitlistForm() {
 
     setStatus("loading");
 
-    // Simulated submission — no backend in this phase
-    await new Promise((resolve) => setTimeout(resolve, 1400));
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
 
-    setStatus("success");
-    setEmail("");
+      if (!response.ok) {
+        throw new Error("Failed to submit");
+      }
+
+      setStatus("success");
+      setEmail("");
+    } catch {
+      setStatus("error");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
