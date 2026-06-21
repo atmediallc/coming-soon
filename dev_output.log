@@ -5,13 +5,9 @@
 ▲ Next.js 16.2.9 (Turbopack)
 - Local:         http://localhost:3000
 - Network:       http://192.168.0.2:3000
-✓ Ready in 562ms
-Attention: Next.js now collects completely anonymous telemetry regarding usage.
-This information is used to shape Next.js' roadmap and prioritize features.
-You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
-https://nextjs.org/telemetry
-
+✓ Ready in 540ms
 ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
 
 ○ Compiling / ...
- GET / 200 in 6.8s (next.js: 4.4s, proxy.ts: 155ms, application-code: 2.3s)
+ GET / 200 in 6.5s (next.js: 4.5s, proxy.ts: 116ms, application-code: 1939ms)
+ GET / 200 in 339ms (next.js: 6ms, proxy.ts: 9ms, application-code: 324ms)

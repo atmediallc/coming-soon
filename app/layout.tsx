@@ -31,6 +31,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main-content"
+          className="absolute left-4 top-0 -translate-y-full focus:translate-y-4 z-50 px-4 py-2 bg-white text-black rounded-md font-semibold outline-none ring-2 ring-accent transition-transform"
+        >
+          Skip to main content
+        </a>
         {children}
         <Analytics />
         <WebMCP />

@@ -85,7 +85,10 @@ export function WaitlistForm() {
         <div className="relative">
           <input
             id={inputId}
+            name="email"
             type="email"
+            autoComplete="email"
+            spellCheck="false"
             placeholder="Enter your email address"
             value={email}
             onChange={handleChange}
