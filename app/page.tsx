@@ -8,7 +8,7 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main id="main-content" className="min-h-screen bg-background text-foreground" tabIndex={-1}>
       {/* Ambient background blobs — decorative, hidden from AT */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="absolute top-[-20%] left-[-10%] w-[900px] h-[900px] bg-accent/5 blur-[160px] rounded-full animate-float opacity-25" />
