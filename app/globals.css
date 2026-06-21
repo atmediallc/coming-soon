@@ -42,9 +42,10 @@
     0%, 100% { transform: translateY(0); }
     50%       { transform: translateY(-16px); }
   }
+  /* Optimize GPU load: animate opacity and scale instead of expensive filter: blur() */
   @keyframes glow {
-    0%, 100% { opacity: 0.25; transform: scale(1);    filter: blur(120px); }
-    50%       { opacity: 0.45; transform: scale(1.08); filter: blur(140px); }
+    0%, 100% { opacity: 0.25; transform: scale(1);    }
+    50%       { opacity: 0.45; transform: scale(1.08); }
   }
 }
 
