@@ -3,7 +3,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { email } = body;
 
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    if (!email || typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       return Response.json({ error: "Invalid email" }, { status: 400 });
     }
 
