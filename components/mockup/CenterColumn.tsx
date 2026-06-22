@@ -34,8 +34,8 @@ const CALENDAR_COLORS = [
   "rgba(59,130,246,0.18)",
   "rgba(59,130,246,0.35)",
   "rgba(59,130,246,0.55)",
-  "rgba(59,130,246,0.75)",
-];
+  "rgba(59,130,246,0.75)"
+] as const;
 
 export function CenterColumn() {
   return (
