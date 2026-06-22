@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useId } from "react";
+import { useState, useId, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants";
 import { ArrowRight, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
@@ -11,6 +11,17 @@ export function WaitlistForm() {
   const inputId = useId();
   const errorId = useId();
   const microcopyId = useId();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (status === "success" && successRef.current) {
+      successRef.current.focus();
+    } else if (status === "error" && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [status]);
 
   const isValidEmail = (value: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
@@ -55,7 +66,9 @@ export function WaitlistForm() {
       <div
         role="status"
         aria-live="polite"
-        className="flex flex-col items-center space-y-3 animate-fade-in py-2"
+        className="flex flex-col items-center space-y-3 animate-fade-in py-2 outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 rounded-lg p-2"
+        tabIndex={-1}
+        ref={successRef}
       >
         <div className="flex items-center space-x-2 text-emerald-400">
           <CheckCircle2 className="h-5 w-5 shrink-0" aria-hidden="true" />
@@ -84,6 +97,7 @@ export function WaitlistForm() {
 
         <div className="relative">
           <input
+            ref={inputRef}
             id={inputId}
             name="email"
             type="email"
