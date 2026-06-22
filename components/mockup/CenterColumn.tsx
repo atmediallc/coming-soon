@@ -27,6 +27,16 @@ const CALENDAR_CELLS = [
   4,2,1,0,3,2,1,
 ];
 
+// ⚡ Bolt Optimization: Hoisted CALENDAR_COLORS outside the component
+// This prevents recreating the same 5-element array 28 times per render inside the map() loop
+const CALENDAR_COLORS = [
+  "rgba(255,255,255,0.04)",
+  "rgba(59,130,246,0.18)",
+  "rgba(59,130,246,0.35)",
+  "rgba(59,130,246,0.55)",
+  "rgba(59,130,246,0.75)",
+];
+
 export function CenterColumn() {
   return (
     <div className="col-span-12 md:col-span-8 lg:col-span-6 flex flex-col gap-3">
@@ -101,19 +111,12 @@ export function CenterColumn() {
         </div>
         <div className="grid gap-0.5" style={{ gridTemplateColumns: "repeat(7, 1fr)" }} aria-hidden="true">
           {CALENDAR_CELLS.map((intensity, i) => {
-            const colors = [
-              "rgba(255,255,255,0.04)",
-              "rgba(59,130,246,0.18)",
-              "rgba(59,130,246,0.35)",
-              "rgba(59,130,246,0.55)",
-              "rgba(59,130,246,0.75)",
-            ];
             return (
               <div
                 key={i}
                 className="aspect-square rounded-sm"
                 style={{
-                  backgroundColor: colors[intensity] || colors[0],
+                  backgroundColor: CALENDAR_COLORS[intensity] || CALENDAR_COLORS[0],
                 }}
               />
             );
