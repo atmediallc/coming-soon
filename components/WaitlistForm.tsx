@@ -111,7 +111,7 @@ export function WaitlistForm() {
             aria-invalid={status === "error" ? "true" : "false"}
             aria-describedby={status === "error" ? errorId : microcopyId}
             className={cn(
-              "w-full bg-white/5 border rounded-xl px-4 py-3.5 text-white placeholder:text-white/30 outline-none transition-all duration-300",
+              "w-full bg-white/5 border rounded-xl pl-4 pr-[136px] py-3.5 text-white placeholder:text-white/30 outline-none transition-all duration-300",
               "focus:bg-white/8 focus:ring-2 focus:ring-accent/50 focus:ring-offset-0",
               "disabled:opacity-50 disabled:cursor-not-allowed",
               status === "error"
