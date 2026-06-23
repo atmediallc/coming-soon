@@ -1,7 +1,8 @@
 export async function POST(request: Request) {
   // Enforce Content-Type to prevent CSRF via simple requests
   const contentType = request.headers.get("content-type");
-  if (!contentType || !contentType.includes("application/json")) {
+  const mimeType = contentType?.split(";")[0].trim();
+  if (mimeType !== "application/json") {
     return Response.json({ error: "Unsupported Media Type" }, { status: 415 });
   }
 
