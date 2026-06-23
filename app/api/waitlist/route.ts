@@ -1,4 +1,10 @@
 export async function POST(request: Request) {
+  // Enforce Content-Type to prevent CSRF via simple requests
+  const contentType = request.headers.get("content-type");
+  if (!contentType || !contentType.includes("application/json")) {
+    return Response.json({ error: "Unsupported Media Type" }, { status: 415 });
+  }
+
   try {
     const body = await request.json();
     const { email } = body;
@@ -11,7 +17,9 @@ export async function POST(request: Request) {
     await new Promise((resolve) => setTimeout(resolve, 1400));
 
     return Response.json({ success: true, message: "Email added to waitlist" });
-  } catch {
+  } catch (error) {
+    // Securely log the error server-side without exposing details to the client
+    console.error("Waitlist submission failed:", error);
     return Response.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
