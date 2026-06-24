@@ -1,7 +1,5 @@
-import { NextRequest } from 'next/server';
-
-export async function GET(request: NextRequest) {
-  const origin = new URL(request.url).origin;
+export async function GET() {
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
   const metadata = {
     issuer: origin,
     authorization_endpoint: `${origin}/oauth/authorize`,
