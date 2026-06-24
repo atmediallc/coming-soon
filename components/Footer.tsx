@@ -1,4 +1,5 @@
 import { SITE_CONFIG, CURRENT_YEAR } from "@/lib/constants";
+import { ExternalLink } from "lucide-react";
 
 export function Footer() {
   return (
@@ -19,21 +20,25 @@ export function Footer() {
               href={SITE_CONFIG.links.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-muted hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded"
+              className="flex items-center text-sm text-muted hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded"
             >
               Twitter
+              <ExternalLink className="ml-1 h-3 w-3 opacity-70" aria-hidden="true" />
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
             <a
               href={SITE_CONFIG.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-muted hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded"
+              className="flex items-center text-sm text-muted hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded"
             >
               LinkedIn
+              <ExternalLink className="ml-1 h-3 w-3 opacity-70" aria-hidden="true" />
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
             <a
               href={SITE_CONFIG.links.contact}
-              className="text-sm text-muted hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded"
+              className="flex items-center text-sm text-muted hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded"
             >
               Contact
             </a>
