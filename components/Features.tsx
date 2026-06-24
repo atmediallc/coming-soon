@@ -25,13 +25,39 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   target: Target,
 };
 
+// ⚡ Bolt Optimization: Pre-calculate complex Tailwind class strings outside
+// of the React render loop. Running `cn` (clsx + tailwind-merge) inside
+// .map() during every render cycle wastes CPU cycles on static data.
 const FEATURES_BY_CATEGORY = FEATURE_CATEGORIES.map((cat) => ({
   ...cat,
-  features: FEATURES.filter((f) => f.category === cat.key).map((feature) => ({
-    ...feature,
-    Icon: ICON_MAP[feature.icon] ?? Zap,
-    isFeatured: feature.featured === true,
-  })),
+  features: FEATURES.filter((f) => f.category === cat.key).map((feature, index) => {
+    const isFeatured = feature.featured === true;
+    const Icon = ICON_MAP[feature.icon] ?? Zap;
+
+    return {
+      ...feature,
+      Icon,
+      isFeatured,
+      delay: `${index * 60 + 200}ms`,
+      articleClass: cn(
+        "glass rounded-2xl glass-hover group p-7",
+        "animate-fade-in-up border",
+        isFeatured
+          ? "border-accent/20 bg-accent/[0.03] md:col-span-1 relative overflow-hidden"
+          : "border-white/5"
+      ),
+      iconContainerClass: cn(
+        "h-11 w-11 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300",
+        isFeatured
+          ? "bg-accent/15 border border-accent/30 group-hover:bg-accent/25"
+          : "bg-white/5 border border-white/8 group-hover:bg-white/10 group-hover:border-white/15"
+      ),
+      iconClass: cn(
+        "h-5 w-5",
+        isFeatured ? "text-accent" : "text-white/60 group-hover:text-white/80"
+      )
+    };
+  }),
 }));
 
 export function Features() {
@@ -68,20 +94,14 @@ export function Features() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {cat.features.map((feature, index) => {
+                {cat.features.map((feature) => {
                   const { Icon, isFeatured } = feature;
 
                   return (
                     <article
                       key={feature.title}
-                      className={cn(
-                        "glass rounded-2xl glass-hover group p-7",
-                        "animate-fade-in-up border",
-                        isFeatured
-                          ? "border-accent/20 bg-accent/[0.03] md:col-span-1 relative overflow-hidden"
-                          : "border-white/5"
-                      )}
-                      style={{ animationDelay: `${index * 60 + 200}ms` }}
+                      className={feature.articleClass}
+                      style={{ animationDelay: feature.delay }}
                     >
                       {isFeatured && (
                         <div
@@ -93,20 +113,10 @@ export function Features() {
                       )}
 
                       <div
-                        className={cn(
-                          "h-11 w-11 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300",
-                          isFeatured
-                            ? "bg-accent/15 border border-accent/30 group-hover:bg-accent/25"
-                            : "bg-white/5 border border-white/8 group-hover:bg-white/10 group-hover:border-white/15"
-                        )}
+                        className={feature.iconContainerClass}
                         aria-hidden="true"
                       >
-                        <Icon
-                          className={cn(
-                            "h-5 w-5",
-                            isFeatured ? "text-accent" : "text-white/60 group-hover:text-white/80"
-                          )}
-                        />
+                        <Icon className={feature.iconClass} />
                       </div>
 
                       <h3 className="text-base font-semibold mb-2.5 text-white">
