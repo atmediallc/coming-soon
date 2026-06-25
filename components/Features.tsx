@@ -87,7 +87,7 @@ export function Features() {
               {/* Category label */}
               <div className="flex items-center space-x-3 mb-6">
                 <div className="h-px flex-1 bg-white/5" aria-hidden="true" />
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-white/25">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-white/50">
                   {cat.label}
                 </span>
                 <div className="h-px flex-1 bg-white/5" aria-hidden="true" />

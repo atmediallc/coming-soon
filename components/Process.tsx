@@ -87,7 +87,7 @@ export function Process() {
                       )}>
                         {step.label}
                       </p>
-                      <p className="text-[12px] text-white/40 mt-0.5">{step.description}</p>
+                      <p className="text-[12px] text-white/50 mt-0.5">{step.description}</p>
                     </div>
                   </li>
                 ))}
@@ -109,7 +109,7 @@ export function Process() {
                       <div className="text-lg font-bold text-white tracking-tight">
                         {step.label}
                       </div>
-                      <p className="text-[12px] text-white/40">{step.description}</p>
+                      <p className="text-[12px] text-white/50">{step.description}</p>
                     </div>
                   </li>
                 ))}

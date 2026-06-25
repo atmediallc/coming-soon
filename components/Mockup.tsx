@@ -19,7 +19,7 @@ export function Mockup() {
       />
 
       {/* Sample data disclaimer */}
-      <p className="text-center text-[11px] text-white/25 mb-3 tracking-wide">
+      <p className="text-center text-[11px] text-white/50 mb-3 tracking-wide">
         {SITE_CONFIG.sampleDataDisclaimer}
       </p>
 
