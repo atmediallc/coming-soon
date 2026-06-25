@@ -1,4 +1,10 @@
 export async function POST(request: Request) {
+  // Security Enhancement: Prevent resource exhaustion from overly large payloads
+  const contentLength = request.headers.get("content-length");
+  if (contentLength && parseInt(contentLength, 10) > 2048) {
+    return Response.json({ error: "Payload Too Large" }, { status: 413 });
+  }
+
   // Enforce Content-Type to prevent CSRF via simple requests
   const contentType = request.headers.get("content-type");
   const mimeType = contentType?.split(";")[0].trim();
