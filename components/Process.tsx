@@ -1,7 +1,24 @@
 import { PROCESS_STEPS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const PROCESS_STEPS_REGULAR = PROCESS_STEPS.filter((s) => !s.isOutput);
+// ⚡ Bolt Optimization: Pre-calculate complex Tailwind class strings outside
+// of the React render loop to avoid running `cn` (clsx + tailwind-merge)
+// during every render cycle.
+const PROCESS_STEPS_REGULAR = PROCESS_STEPS.filter((s) => !s.isOutput).map(step => ({
+  ...step,
+  stepNumberClass: cn(
+    "h-8 w-8 rounded-full flex items-center justify-center border border-white/10 shrink-0 mt-0.5",
+    step.highlighted ? "bg-accent/30 border-accent/40" : "bg-white/8"
+  ),
+  contentClass: cn(
+    "flex-1 glass p-3.5 rounded-xl border border-white/5",
+    step.highlighted && "border-accent/20 bg-accent/[0.04]"
+  ),
+  labelClass: cn(
+    "font-semibold text-sm",
+    step.highlighted ? "text-accent" : "text-white"
+  )
+}));
 const PROCESS_STEPS_OUTPUT = PROCESS_STEPS.filter((s) => s.isOutput);
 
 export function Process() {
@@ -66,25 +83,14 @@ export function Process() {
                     )}
                     {/* Step number */}
                     <div
-                      className={cn(
-                        "h-8 w-8 rounded-full flex items-center justify-center border border-white/10 shrink-0 mt-0.5",
-                        step.highlighted ? "bg-accent/30 border-accent/40" : "bg-white/8"
-                      )}
+                      className={step.stepNumberClass}
                       aria-hidden="true"
                     >
                       <span className="text-[11px] font-bold text-white">{i + 1}</span>
                     </div>
                     {/* Content */}
-                    <div
-                      className={cn(
-                        "flex-1 glass p-3.5 rounded-xl border border-white/5",
-                        step.highlighted && "border-accent/20 bg-accent/[0.04]"
-                      )}
-                    >
-                      <p className={cn(
-                        "font-semibold text-sm",
-                        step.highlighted ? "text-accent" : "text-white"
-                      )}>
+                    <div className={step.contentClass}>
+                      <p className={step.labelClass}>
                         {step.label}
                       </p>
                       <p className="text-[12px] text-white/40 mt-0.5">{step.description}</p>
