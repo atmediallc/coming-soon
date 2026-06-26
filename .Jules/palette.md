@@ -8,3 +8,7 @@
 **Learning:** When positioning elements (like buttons or icons) absolutely within an input field, the input's padding must account for the full width of the absolute element plus any margins. Otherwise, long user input will scroll behind the element, becoming unreadable and causing a frustrating user experience.
 **Action:** Always verify input padding against the width of any overlapping absolute elements to ensure text remains fully visible at all scroll positions.
 ## 2024-06-24 - External Links A11y and UX\n**Learning:** Links that open in a new tab (`target="_blank"`) should provide visual and screen-reader cues to avoid disorienting users.\n**Action:** Add an external link icon and an `<span className="sr-only"> (opens in a new tab)</span>` label to all such links to clearly communicate behavior.
+
+## 2026-06-26 - Text Contrast and Opacities
+**Learning:** Using low opacity values for secondary text (e.g., `text-white/30`, `text-white/40`) often fails WCAG AA contrast ratio requirements, making the text difficult or impossible for users to read on dark backgrounds.
+**Action:** For secondary text, use at least `text-white/50` or pre-defined semantic tokens like `text-muted` which are already confirmed to meet WCAG AA contrast standards.
