@@ -1,5 +1,19 @@
+import { getDb, type WaitlistStore } from "@/lib/db/waitlist";
+
+export const runtime = "nodejs";
+
+function checkAuth(request: Request): boolean {
+  const token = process.env.WAITLIST_ENDPOINT_TOKEN?.trim();
+  if (!token) return true;
+  const authHeader = request.headers.get("authorization");
+  return authHeader === `Bearer ${token}`;
+}
+
+function getStore(): WaitlistStore {
+  return getDb();
+}
+
 export async function POST(request: Request) {
-  // Enforce Content-Type to prevent CSRF via simple requests
   const contentType = request.headers.get("content-type");
   const mimeType = contentType?.split(";")[0].trim();
   if (mimeType !== "application/json") {
@@ -22,19 +36,25 @@ export async function POST(request: Request) {
       ? body.email.trim().toLowerCase()
       : "";
 
+  if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return Response.json({ error: "Invalid email" }, { status: 400 });
+  }
+
+  if (!checkAuth(request)) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
-    if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return Response.json({ error: "Invalid email" }, { status: 400 });
+    try {
+      getStore().insertEmail(email, process.env.WAITLIST_SOURCE || "coming-soon");
+    } catch (dbError) {
+      console.error("Waitlist local store insert failed:", dbError);
     }
 
     const waitlistEndpoint = process.env.WAITLIST_ENDPOINT_URL?.trim();
 
     if (!waitlistEndpoint) {
-      console.error("Waitlist submission failed: WAITLIST_ENDPOINT_URL is not configured");
-      return Response.json(
-        { error: "Waitlist backend is not configured" },
-        { status: 503 }
-      );
+      return Response.json({ success: true, message: "Email added to waitlist" });
     }
 
     const headers = new Headers({
@@ -66,14 +86,27 @@ export async function POST(request: Request) {
 
       return Response.json(
         { error: "Waitlist backend rejected submission" },
-        { status: 502 }
+        { status: 502 },
       );
     }
 
     return Response.json({ success: true, message: "Email added to waitlist" });
   } catch (error) {
-    // Securely log the error server-side without exposing details to the client
     console.error("Waitlist submission failed:", error);
+    return Response.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}
+
+export async function GET(request: Request) {
+  if (!checkAuth(request)) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const entries = getStore().getAllEmails();
+    return Response.json({ entries });
+  } catch (error) {
+    console.error("Waitlist read failed:", error);
     return Response.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
