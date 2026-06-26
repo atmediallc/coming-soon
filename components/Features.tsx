@@ -106,8 +106,8 @@ export function Features() {
                       {isFeatured && (
                         <div
                           className="absolute top-0 right-0 px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-accent bg-accent/10 border-l border-b border-accent/20 rounded-bl-xl"
-                          aria-label="Featured capability"
                         >
+                          <span className="sr-only">Featured capability: </span>
                           AI-Powered
                         </div>
                       )}
