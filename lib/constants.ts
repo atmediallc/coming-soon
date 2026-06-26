@@ -9,6 +9,7 @@ export const SITE_CONFIG = {
   waitlistMomentum: "Built for process-driven traders joining the private beta.",
   successMessage: "You're in. We'll reach out when your spot opens.",
   errorMessage: "Enter a valid email to request access.",
+  submissionErrorMessage: "We couldn't save that request. Please try again later.",
   loadingMessage: "Requesting...",
   disclaimer: "TraderAdd is not financial advice. Trading involves risk.",
   sampleDataDisclaimer: "Sample data for product preview only.",

@@ -6,16 +6,69 @@ export async function POST(request: Request) {
     return Response.json({ error: "Unsupported Media Type" }, { status: 415 });
   }
 
-  try {
-    const body = await request.json();
-    const { email } = body;
+  let body: unknown;
 
-    if (!email || typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const email =
+    typeof body === "object" &&
+    body !== null &&
+    "email" in body &&
+    typeof body.email === "string"
+      ? body.email.trim().toLowerCase()
+      : "";
+
+  try {
+    if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return Response.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    // Simulate backend processing
-    await new Promise((resolve) => setTimeout(resolve, 1400));
+    const waitlistEndpoint = process.env.WAITLIST_ENDPOINT_URL?.trim();
+
+    if (!waitlistEndpoint) {
+      console.error("Waitlist submission failed: WAITLIST_ENDPOINT_URL is not configured");
+      return Response.json(
+        { error: "Waitlist backend is not configured" },
+        { status: 503 }
+      );
+    }
+
+    const headers = new Headers({
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    });
+    const waitlistToken = process.env.WAITLIST_ENDPOINT_TOKEN?.trim();
+
+    if (waitlistToken) {
+      headers.set("Authorization", `Bearer ${waitlistToken}`);
+    }
+
+    const upstreamResponse = await fetch(waitlistEndpoint, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        email,
+        source: process.env.WAITLIST_SOURCE || "coming-soon",
+        submittedAt: new Date().toISOString(),
+        userAgent: request.headers.get("user-agent") || undefined,
+      }),
+    });
+
+    if (!upstreamResponse.ok) {
+      console.error("Waitlist upstream rejected submission", {
+        status: upstreamResponse.status,
+        statusText: upstreamResponse.statusText,
+      });
+
+      return Response.json(
+        { error: "Waitlist backend rejected submission" },
+        { status: 502 }
+      );
+    }
 
     return Response.json({ success: true, message: "Email added to waitlist" });
   } catch (error) {

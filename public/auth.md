@@ -4,7 +4,7 @@
 This service allows AI agents to access a trader's journal.
 
 ## Registration
-To register your agent, please direct users to `https://example.com/agent/register`.
+Agent registration is not publicly available yet.
 
 ## Supported Methods
 We currently support `id_jag` and `verified_email`.
