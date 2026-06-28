@@ -46,10 +46,10 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-          <p className="text-xs text-white/30 font-medium uppercase tracking-[0.15em]">
+          <p className="text-xs text-white/50 font-medium uppercase tracking-[0.15em]">
             &copy; {CURRENT_YEAR} {SITE_CONFIG.productName}. All rights reserved.
           </p>
-          <p className="text-xs text-white/30 italic">
+          <p className="text-xs text-white/50 italic">
             {SITE_CONFIG.disclaimer}
           </p>
         </div>
