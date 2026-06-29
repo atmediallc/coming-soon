@@ -19,7 +19,7 @@ export function Mockup() {
       />
 
       {/* Sample data disclaimer */}
-      <p className="text-center text-[11px] text-white/25 mb-3 tracking-wide">
+      <p className="text-center text-[11px] text-white/50 mb-3 tracking-wide">
         {SITE_CONFIG.sampleDataDisclaimer}
       </p>
 
@@ -33,7 +33,7 @@ export function Mockup() {
             <div className="h-2.5 w-2.5 rounded-full bg-white/10" />
             <div className="h-2.5 w-2.5 rounded-full bg-white/10" />
           </div>
-          <span className="text-[11px] font-bold text-white/20 tracking-tighter select-none">
+          <span className="text-[11px] font-bold text-white/50 tracking-tighter select-none">
             {SITE_CONFIG.productName} · Dashboard
           </span>
         </div>
