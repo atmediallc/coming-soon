@@ -12,3 +12,7 @@
 ## 2024-06-26 - aria-label on Generic Elements
 **Learning:** Using `aria-label` on a generic `<div>` or `<span>` without a valid role (like `group`, `region`, or `button`) is an accessibility anti-pattern. It is often ignored by screen readers, and if it is announced, it overrides the visible text content entirely, removing important context.
 **Action:** Use visually hidden text (`<span className="sr-only">`) to add context to visible text, or ensure the container has a valid `role="group"` if an `aria-label` is strictly necessary to describe a collection of elements.
+
+## 2024-06-29 - Text Contrast on Dark Backgrounds
+**Learning:** Using opacities below 50% (like `text-white/20` or `text-white/40`) for secondary text on dark backgrounds reduces readability and fails WCAG AA contrast ratios.
+**Action:** To maintain accessibility, use at least `text-white/50` (or `text-muted`) for all secondary or helper text on dark backgrounds.
