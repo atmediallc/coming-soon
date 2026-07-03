@@ -109,6 +109,7 @@ export function WaitlistForm() {
             placeholder="Enter your email address"
             value={email}
             onChange={handleChange}
+            maxLength={254}
             required
             disabled={status === "loading"}
             aria-invalid={status === "error" ? "true" : "false"}
