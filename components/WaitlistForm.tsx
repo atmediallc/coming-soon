@@ -77,7 +77,7 @@ export function WaitlistForm() {
           <CheckCircle2 className="h-5 w-5 shrink-0" aria-hidden="true" />
           <p className="text-sm font-semibold">{SITE_CONFIG.successMessage}</p>
         </div>
-        <p className="text-xs text-white/40">{SITE_CONFIG.privacyNote}</p>
+        <p className="text-xs text-white/50">{SITE_CONFIG.privacyNote}</p>
       </div>
     );
   }
@@ -87,7 +87,7 @@ export function WaitlistForm() {
       {/* Momentum copy */}
       <p
         id={microcopyId}
-        className="text-center text-xs text-white/40 mb-3 font-medium"
+        className="text-center text-xs text-white/50 mb-3 font-medium"
       >
         {SITE_CONFIG.waitlistMomentum}
       </p>
@@ -114,7 +114,7 @@ export function WaitlistForm() {
             aria-invalid={status === "error" ? "true" : "false"}
             aria-describedby={status === "error" ? errorId : microcopyId}
             className={cn(
-              "w-full bg-white/5 border rounded-xl pl-4 pr-[180px] py-3.5 text-white placeholder:text-white/30 outline-none transition-all duration-300",
+              "w-full bg-white/5 border rounded-xl pl-4 pr-[180px] py-3.5 text-white placeholder:text-white/50 outline-none transition-all duration-300",
               "focus:bg-white/8 focus:ring-2 focus:ring-accent/50 focus:ring-offset-0",
               "disabled:opacity-50 disabled:cursor-not-allowed",
               status === "error"
@@ -161,7 +161,7 @@ export function WaitlistForm() {
       </form>
 
       {/* Privacy microcopy */}
-      <p className="text-center text-xs text-white/30 mt-3">
+      <p className="text-center text-xs text-white/50 mt-3">
         {SITE_CONFIG.privacyNote}
       </p>
     </div>
