@@ -20,6 +20,11 @@ export async function POST(request: Request) {
     return Response.json({ error: "Unsupported Media Type" }, { status: 415 });
   }
 
+  const contentLength = request.headers.get("content-length");
+  if (contentLength && parseInt(contentLength, 10) > 1024) {
+    return Response.json({ error: "Payload Too Large" }, { status: 413 });
+  }
+
   let body: unknown;
 
   try {
