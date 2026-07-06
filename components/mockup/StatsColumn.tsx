@@ -6,7 +6,7 @@ export function StatsColumn() {
 
       {/* Net P&L */}
       <div className="glass p-3.5 rounded-xl border-l-[3px] border-emerald-500/60 flex-1 md:flex-none">
-        <p className="text-[10px] text-white/40 mb-1 font-medium uppercase tracking-widest">
+        <p className="text-[10px] text-white/50 mb-1 font-medium uppercase tracking-widest">
           Net P&amp;L · Monthly
         </p>
         <p className="text-xl font-bold text-emerald-400 tabular-nums">
@@ -17,7 +17,7 @@ export function StatsColumn() {
       {/* Win Rate */}
       <div className="glass p-3.5 rounded-xl flex-1 md:flex-none">
         <div className="flex justify-between items-end mb-2">
-          <p className="text-[10px] text-white/40 font-medium uppercase tracking-widest">Win Rate</p>
+          <p className="text-[10px] text-white/50 font-medium uppercase tracking-widest">Win Rate</p>
           <p className="text-base font-bold text-white tabular-nums">{MOCKUP_DATA.winRate}</p>
         </div>
         <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden" role="meter" aria-valuenow={parseFloat(MOCKUP_DATA.winRate)} aria-valuemin={0} aria-valuemax={100} aria-label="Win rate">
@@ -28,11 +28,11 @@ export function StatsColumn() {
       {/* Mini stats row */}
       <div className="hidden md:grid grid-cols-2 gap-2">
         <div className="glass p-3 rounded-xl text-center">
-          <p className="text-[9px] text-white/30 uppercase tracking-widest mb-1">R Multiple</p>
+          <p className="text-[9px] text-white/50 uppercase tracking-widest mb-1">R Multiple</p>
           <p className="text-sm font-bold text-white tabular-nums">{MOCKUP_DATA.rMultiple}</p>
         </div>
         <div className="glass p-3 rounded-xl text-center">
-          <p className="text-[9px] text-white/30 uppercase tracking-widest mb-1">Reviews</p>
+          <p className="text-[9px] text-white/50 uppercase tracking-widest mb-1">Reviews</p>
           <p className="text-sm font-bold text-white tabular-nums">{MOCKUP_DATA.tradesReviewed}</p>
         </div>
       </div>
@@ -49,7 +49,7 @@ export function StatsColumn() {
           &ldquo;{MOCKUP_DATA.aiInsight}&rdquo;
         </p>
         <div className="mt-2.5 pt-2.5 border-t border-white/5 flex items-center justify-between">
-          <span className="text-[9px] text-white/30 uppercase tracking-widest">Review Score</span>
+          <span className="text-[9px] text-white/50 uppercase tracking-widest">Review Score</span>
           <span className="text-xs font-bold text-accent">{MOCKUP_DATA.reviewScore}</span>
         </div>
       </div>

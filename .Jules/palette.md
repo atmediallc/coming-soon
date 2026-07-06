@@ -12,3 +12,7 @@
 ## 2024-06-26 - aria-label on Generic Elements
 **Learning:** Using `aria-label` on a generic `<div>` or `<span>` without a valid role (like `group`, `region`, or `button`) is an accessibility anti-pattern. It is often ignored by screen readers, and if it is announced, it overrides the visible text content entirely, removing important context.
 **Action:** Use visually hidden text (`<span className="sr-only">`) to add context to visible text, or ensure the container has a valid `role="group"` if an `aria-label` is strictly necessary to describe a collection of elements.
+
+## 2024-07-06 - Color Contrast Ratios in Dark Mode
+**Learning:** In dark mode designs, designers frequently use very low opacity white text (e.g., `text-white/20`, `text-white/30`, `text-white/40`) for secondary and tertiary information to create visual hierarchy. While this looks aesthetically pleasing, it regularly fails WCAG AA minimum contrast ratio guidelines (4.5:1 for normal text).
+**Action:** When auditing dark mode interfaces, proactively check the contrast of low-opacity text. Always enforce a minimum of `text-white/50` or an equivalent semi-transparent muted color to ensure readability without breaking the visual hierarchy.

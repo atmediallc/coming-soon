@@ -17,7 +17,7 @@ export function Sidebar() {
         "M9 19V6l12-3v13",
       ].map((d, i) => (
         <div key={i} className="h-7 w-7 rounded-md bg-white/5 flex items-center justify-center" aria-hidden="true">
-          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-white/20" fill="none" stroke="currentColor" strokeWidth={2}>
+          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-white/50" fill="none" stroke="currentColor" strokeWidth={2}>
             <path d={d} strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>

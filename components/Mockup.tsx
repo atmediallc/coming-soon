@@ -33,7 +33,7 @@ export function Mockup() {
             <div className="h-2.5 w-2.5 rounded-full bg-white/10" />
             <div className="h-2.5 w-2.5 rounded-full bg-white/10" />
           </div>
-          <span className="text-[11px] font-bold text-white/20 tracking-tighter select-none">
+          <span className="text-[11px] font-bold text-white/50 tracking-tighter select-none">
             {SITE_CONFIG.productName} · Dashboard
           </span>
         </div>

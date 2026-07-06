@@ -6,7 +6,7 @@ export function RightColumn() {
 
       {/* Backtest preview */}
       <div className="glass p-3.5 rounded-xl border border-white/5 flex-1">
-        <p className="text-[10px] font-semibold text-white/40 uppercase tracking-widest mb-3">
+        <p className="text-[10px] font-semibold text-white/50 uppercase tracking-widest mb-3">
           Backtest Preview
         </p>
         <div className="space-y-2.5">
@@ -40,7 +40,7 @@ export function RightColumn() {
 
       {/* Risk / Discipline card */}
       <div className="glass p-3.5 rounded-xl border border-white/5 shrink-0">
-        <p className="text-[10px] font-semibold text-white/40 uppercase tracking-widest mb-3">
+        <p className="text-[10px] font-semibold text-white/50 uppercase tracking-widest mb-3">
           Risk &amp; Discipline
         </p>
         <div className="space-y-2">
@@ -51,7 +51,7 @@ export function RightColumn() {
           ].map((item) => (
             <div key={item.label}>
               <div className="flex justify-between mb-1">
-                <span className="text-[10px] text-white/40">{item.label}</span>
+                <span className="text-[10px] text-white/50">{item.label}</span>
                 <span className="text-[10px] font-bold text-white tabular-nums">{item.value}%</span>
               </div>
               <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
@@ -61,7 +61,7 @@ export function RightColumn() {
           ))}
         </div>
         <div className="mt-3 pt-2.5 border-t border-white/5 flex justify-between">
-          <span className="text-[9px] text-white/30 uppercase tracking-widest">Journal Quality</span>
+          <span className="text-[9px] text-white/50 uppercase tracking-widest">Journal Quality</span>
           <span className="text-[10px] font-bold text-accent">{MOCKUP_DATA.journalQuality}</span>
         </div>
       </div>
