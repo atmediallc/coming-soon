@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false, // Prevent Next.js technology stack disclosure
   async headers() {
     return [
       {
