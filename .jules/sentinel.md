@@ -12,3 +12,8 @@
 **Vulnerability:** The `.well-known` API endpoints (like `oauth-authorization-server`, `mcp`, `agent-skills`, `oauth-protected-resource`) dynamically determined the base URL using `new URL(request.url).origin`. Next.js resolves `request.url` using the `Host` or `X-Forwarded-Host` headers when deployed behind a proxy. An attacker could spoof this header, tricking the endpoint into returning a malicious URL (e.g., an attacker-controlled OAuth authorization endpoint or token endpoint), leading to OAuth code interception or similar attacks.
 **Learning:** Never trust the `Host` or `X-Forwarded-Host` headers to construct absolute URLs, especially for security-critical metadata like OAuth server URLs or agent skills configurations.
 **Prevention:** Use a configured environment variable (e.g., `NEXT_PUBLIC_SITE_URL`) or hardcoded constants for the base URL when returning absolute URLs in API endpoints.
+
+## 2024-07-07 - Prevent Next.js DoS via Early Content-Length Checks
+**Vulnerability:** Next.js `request.json()` loads the entire request body into memory before parsing, making API endpoints susceptible to memory exhaustion Denial of Service (DoS) attacks if large payloads are sent.
+**Learning:** Next.js does not enforce built-in payload size limits on Edge/Node runtime API routes for simple `Request` bodies.
+**Prevention:** Always enforce early `Content-Length` checks (e.g., rejecting payloads > 1024 bytes) before invoking `await request.json()` to drop oversized requests early in the lifecycle. Complement this with client-side `maxLength` attributes on input forms.
