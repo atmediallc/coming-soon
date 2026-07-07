@@ -87,14 +87,14 @@ export function Process() {
                       )}>
                         {step.label}
                       </p>
-                      <p className="text-[12px] text-white/40 mt-0.5">{step.description}</p>
+                      <p className="text-[12px] text-white/50 mt-0.5">{step.description}</p>
                     </div>
                   </li>
                 ))}
 
                 {/* Arrow divider */}
                 <li aria-hidden="true" className="flex justify-center">
-                  <svg viewBox="0 0 24 24" className="h-4 w-4 text-white/20" fill="none" stroke="currentColor" strokeWidth={2}>
+                  <svg viewBox="0 0 24 24" className="h-4 w-4 text-white/50" fill="none" stroke="currentColor" strokeWidth={2}>
                     <path d="M12 5v14M5 12l7 7 7-7" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </li>
@@ -109,7 +109,7 @@ export function Process() {
                       <div className="text-lg font-bold text-white tracking-tight">
                         {step.label}
                       </div>
-                      <p className="text-[12px] text-white/40">{step.description}</p>
+                      <p className="text-[12px] text-white/50">{step.description}</p>
                     </div>
                   </li>
                 ))}
