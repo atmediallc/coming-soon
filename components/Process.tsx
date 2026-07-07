@@ -4,6 +4,28 @@ import { cn } from "@/lib/utils";
 const PROCESS_STEPS_REGULAR = PROCESS_STEPS.filter((s) => !s.isOutput);
 const PROCESS_STEPS_OUTPUT = PROCESS_STEPS.filter((s) => s.isOutput);
 
+const KEY_OUTCOMES = [
+  "Identify behavioral patterns behind your results",
+  "Spot your highest-quality setups across sessions",
+  "Professionalize your daily review workflow",
+];
+
+const ENHANCED_PROCESS_STEPS_REGULAR = PROCESS_STEPS_REGULAR.map((step) => ({
+  ...step,
+  stepContainerClass: cn(
+    "h-8 w-8 rounded-full flex items-center justify-center border border-white/10 shrink-0 mt-0.5",
+    step.highlighted ? "bg-accent/30 border-accent/40" : "bg-white/8"
+  ),
+  contentContainerClass: cn(
+    "flex-1 glass p-3.5 rounded-xl border border-white/5",
+    step.highlighted && "border-accent/20 bg-accent/[0.04]"
+  ),
+  labelClass: cn(
+    "font-semibold text-sm",
+    step.highlighted ? "text-accent" : "text-white"
+  ),
+}));
+
 export function Process() {
   return (
     <section
@@ -28,11 +50,7 @@ export function Process() {
               that actually drive your performance.
             </p>
             <ul className="flex flex-col space-y-4 pt-4" aria-label="Key outcomes">
-              {[
-                "Identify behavioral patterns behind your results",
-                "Spot your highest-quality setups across sessions",
-                "Professionalize your daily review workflow",
-              ].map((item) => (
+              {KEY_OUTCOMES.map((item) => (
                 <li
                   key={item}
                   className="flex items-center space-x-3 justify-center lg:justify-start"
@@ -55,7 +73,7 @@ export function Process() {
               <div className="absolute inset-0 bg-grid opacity-8 pointer-events-none" aria-hidden="true" />
 
               <ol className="relative flex flex-col space-y-5" aria-label="TraderAdd workflow steps">
-                {PROCESS_STEPS_REGULAR.map((step, i, arr) => (
+                {ENHANCED_PROCESS_STEPS_REGULAR.map((step, i, arr) => (
                   <li key={step.label} className="flex items-start space-x-4 relative">
                     {/* Connector line */}
                     {i < arr.length - 1 && (
@@ -66,25 +84,14 @@ export function Process() {
                     )}
                     {/* Step number */}
                     <div
-                      className={cn(
-                        "h-8 w-8 rounded-full flex items-center justify-center border border-white/10 shrink-0 mt-0.5",
-                        step.highlighted ? "bg-accent/30 border-accent/40" : "bg-white/8"
-                      )}
+                      className={step.stepContainerClass}
                       aria-hidden="true"
                     >
                       <span className="text-[11px] font-bold text-white">{i + 1}</span>
                     </div>
                     {/* Content */}
-                    <div
-                      className={cn(
-                        "flex-1 glass p-3.5 rounded-xl border border-white/5",
-                        step.highlighted && "border-accent/20 bg-accent/[0.04]"
-                      )}
-                    >
-                      <p className={cn(
-                        "font-semibold text-sm",
-                        step.highlighted ? "text-accent" : "text-white"
-                      )}>
+                    <div className={step.contentContainerClass}>
+                      <p className={step.labelClass}>
                         {step.label}
                       </p>
                       <p className="text-[12px] text-white/40 mt-0.5">{step.description}</p>
