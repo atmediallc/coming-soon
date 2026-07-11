@@ -1,0 +1,5 @@
+1. **Optimize `Process.tsx`**: Target `components/Process.tsx` and pre-calculate complex Tailwind class strings and static step arrays outside of the React render loop. The `Process` component currently calls `cn()` multiple times inside a `.map()` loop for static data from `PROCESS_STEPS`. Moving this pre-calculation outside the component scope reduces string interpolations, memory allocation, and CPU cycles during every render. Use `write_file` or `run_in_bash_session` to modify the file.
+2. **Measure Impact**: Run the benchmarks before and after the change using `run_in_bash_session` with the specific command `npx tsx benchmark_process.ts` (using the script `benchmark_process.ts` already created) to verify the expected performance improvement.
+3. **Run Checks**: Run checks using `run_in_bash_session` with commands `pnpm lint` and `pnpm test` to ensure no functionality is broken.
+4. **Pre-commit Checks**: Complete pre-commit steps to ensure proper testing, verification, review, and reflection are done.
+5. **Submit PR**: Create a PR titled "⚡ Bolt: Pre-calculate Tailwind classes in Process component" using the `submit` tool.

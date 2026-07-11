@@ -37,6 +37,19 @@ const CALENDAR_COLORS = [
   "rgba(59,130,246,0.75)"
 ] as const;
 
+// ⚡ Bolt Optimization: Pre-calculate candlestick attributes and calendar colors outside of render map
+// Avoiding math calculations and object lookups during every render cycle saves CPU.
+const PRE_CALCULATED_CANDLES = CANDLES.map(c => ({
+  ...c,
+  wickStroke: c.bull ? "rgba(52,211,153,0.4)" : "rgba(248,113,113,0.4)",
+  bodyY: Math.min(c.open, c.close),
+  bodyX: c.x - CANDLEWIDTH / 2,
+  bodyHeight: Math.max(Math.abs(c.open - c.close), 1),
+  bodyFill: c.bull ? "rgba(52,211,153,0.35)" : "rgba(248,113,113,0.35)",
+}));
+
+const PRE_CALCULATED_CALENDAR = CALENDAR_CELLS.map(intensity => CALENDAR_COLORS[intensity] || CALENDAR_COLORS[0]);
+
 export function CenterColumn() {
   return (
     <div className="col-span-12 md:col-span-8 lg:col-span-6 flex flex-col gap-3">
@@ -76,22 +89,22 @@ export function CenterColumn() {
           />
 
           {/* Abstract candlesticks */}
-          {CANDLES.map((c) => (
+          {PRE_CALCULATED_CANDLES.map((c) => (
             <g key={c.x} aria-hidden="true">
               {/* Wick */}
               <line
                 x1={c.x} y1={c.high}
                 x2={c.x} y2={c.low}
-                stroke={c.bull ? "rgba(52,211,153,0.4)" : "rgba(248,113,113,0.4)"}
+                stroke={c.wickStroke}
                 strokeWidth="0.4"
               />
               {/* Body */}
               <rect
-                x={c.x - CANDLEWIDTH / 2}
-                y={Math.min(c.open, c.close)}
+                x={c.bodyX}
+                y={c.bodyY}
                 width={CANDLEWIDTH}
-                height={Math.max(Math.abs(c.open - c.close), 1)}
-                fill={c.bull ? "rgba(52,211,153,0.35)" : "rgba(248,113,113,0.35)"}
+                height={c.bodyHeight}
+                fill={c.bodyFill}
                 rx="0.5"
               />
             </g>
@@ -110,13 +123,13 @@ export function CenterColumn() {
           </span>
         </div>
         <div className="grid gap-0.5" style={{ gridTemplateColumns: "repeat(7, 1fr)" }} aria-hidden="true">
-          {CALENDAR_CELLS.map((intensity, i) => {
+          {PRE_CALCULATED_CALENDAR.map((color, i) => {
             return (
               <div
                 key={i}
                 className="aspect-square rounded-sm"
                 style={{
-                  backgroundColor: CALENDAR_COLORS[intensity] || CALENDAR_COLORS[0],
+                  backgroundColor: color,
                 }}
               />
             );
