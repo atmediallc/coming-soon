@@ -12,3 +12,6 @@
 ## 2024-06-26 - aria-label on Generic Elements
 **Learning:** Using `aria-label` on a generic `<div>` or `<span>` without a valid role (like `group`, `region`, or `button`) is an accessibility anti-pattern. It is often ignored by screen readers, and if it is announced, it overrides the visible text content entirely, removing important context.
 **Action:** Use visually hidden text (`<span className="sr-only">`) to add context to visible text, or ensure the container has a valid `role="group"` if an `aria-label` is strictly necessary to describe a collection of elements.
+## 2024-05-18 - Establish WCAG AA Contrast Baseline for Secondary Text
+**Learning:** A recurring pattern across components (`WaitlistForm`, `LaunchTimer`) used `text-white/30` and `text-white/40` for microcopy and placeholders, which fails WCAG AA contrast ratio requirements on dark backgrounds, reducing readability.
+**Action:** Established `text-white/50` (or `text-muted`) as the minimum opacity baseline for all secondary text to ensure accessible contrast ratios while maintaining the intended aesthetic hierarchy.
