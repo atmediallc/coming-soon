@@ -106,6 +106,7 @@ export function WaitlistForm() {
             type="email"
             autoComplete="email"
             spellCheck="false"
+            maxLength={254}
             placeholder="Enter your email address"
             value={email}
             onChange={handleChange}
