@@ -9,3 +9,6 @@
 ## 2024-06-24 - Pre-calculate Tailwind classes outside render loops
 **Learning:** Running `cn` (clsx + tailwind-merge) inside a `.map()` callback within a React render function wastes CPU cycles evaluating string interpolations and objects when the backing array consists entirely of static data.
 **Action:** When mapping over static application config arrays to render components, pre-calculate the class names into the object structure outside of the component scope to save runtime rendering overhead.
+## 2024-05-18 - Pre-calculating Tailwind Classes and Hoisting Arrays for Render Performance
+**Learning:** Running `cn()` (which uses `clsx` and `tailwind-merge`) inside a `.map()` loop during every React render cycle on static data wastes CPU cycles and significantly degrades performance. Similarly, re-creating static arrays inside a component causes unnecessary memory allocations and triggers garbage collection on each render.
+**Action:** Always pre-calculate complex Tailwind class strings and hoist static arrays (like configuration lists or steps) outside of the React component's render function when dealing with static data to ensure optimal backend/SSR performance.

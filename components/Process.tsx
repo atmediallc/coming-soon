@@ -1,8 +1,33 @@
 import { PROCESS_STEPS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const PROCESS_STEPS_REGULAR = PROCESS_STEPS.filter((s) => !s.isOutput);
+// ⚡ Bolt Optimization: Pre-calculate complex Tailwind class strings outside
+// of the React render loop. Running `cn` (clsx + tailwind-merge) inside
+// .map() during every render cycle wastes CPU cycles on static data.
+const PROCESS_STEPS_REGULAR = PROCESS_STEPS.filter((s) => !s.isOutput).map(step => ({
+  ...step,
+  numberClassName: cn(
+    "h-8 w-8 rounded-full flex items-center justify-center border border-white/10 shrink-0 mt-0.5",
+    step.highlighted ? "bg-accent/30 border-accent/40" : "bg-white/8"
+  ),
+  contentClassName: cn(
+    "flex-1 glass p-3.5 rounded-xl border border-white/5",
+    step.highlighted && "border-accent/20 bg-accent/[0.04]"
+  ),
+  labelClassName: cn(
+    "font-semibold text-sm",
+    step.highlighted ? "text-accent" : "text-white"
+  )
+}));
 const PROCESS_STEPS_OUTPUT = PROCESS_STEPS.filter((s) => s.isOutput);
+
+// ⚡ Bolt Optimization: Hoist static array outside the component to prevent
+// unnecessary memory allocations and garbage collection on each render.
+const KEY_OUTCOMES = [
+  "Identify behavioral patterns behind your results",
+  "Spot your highest-quality setups across sessions",
+  "Professionalize your daily review workflow",
+];
 
 export function Process() {
   return (
@@ -28,11 +53,7 @@ export function Process() {
               that actually drive your performance.
             </p>
             <ul className="flex flex-col space-y-4 pt-4" aria-label="Key outcomes">
-              {[
-                "Identify behavioral patterns behind your results",
-                "Spot your highest-quality setups across sessions",
-                "Professionalize your daily review workflow",
-              ].map((item) => (
+              {KEY_OUTCOMES.map((item) => (
                 <li
                   key={item}
                   className="flex items-center space-x-3 justify-center lg:justify-start"
@@ -66,25 +87,16 @@ export function Process() {
                     )}
                     {/* Step number */}
                     <div
-                      className={cn(
-                        "h-8 w-8 rounded-full flex items-center justify-center border border-white/10 shrink-0 mt-0.5",
-                        step.highlighted ? "bg-accent/30 border-accent/40" : "bg-white/8"
-                      )}
+                      className={step.numberClassName}
                       aria-hidden="true"
                     >
                       <span className="text-[11px] font-bold text-white">{i + 1}</span>
                     </div>
                     {/* Content */}
                     <div
-                      className={cn(
-                        "flex-1 glass p-3.5 rounded-xl border border-white/5",
-                        step.highlighted && "border-accent/20 bg-accent/[0.04]"
-                      )}
+                      className={step.contentClassName}
                     >
-                      <p className={cn(
-                        "font-semibold text-sm",
-                        step.highlighted ? "text-accent" : "text-white"
-                      )}>
+                      <p className={step.labelClassName}>
                         {step.label}
                       </p>
                       <p className="text-[12px] text-white/40 mt-0.5">{step.description}</p>
