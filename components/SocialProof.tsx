@@ -1,6 +1,17 @@
 import { AUDIENCE_PROFILES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
+// ⚡ Bolt Optimization: Pre-calculate complex Tailwind class strings and hoist
+// arrays outside of the React render loop. Running `cn` inside .map() during
+// every render cycle wastes CPU cycles on static data.
+const AUDIENCE_PROFILES_ENHANCED = AUDIENCE_PROFILES.map(profile => ({
+  ...profile,
+  className: cn(
+    "glass rounded-2xl p-5 text-left",
+    "border border-white/5 hover:border-white/10 transition-colors duration-300"
+  )
+}));
+
 // Static CSS icon shapes — no external assets
 const ICONS: Record<string, React.ReactNode> = {
   chart: (
@@ -50,13 +61,10 @@ export function SocialProof() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-4xl">
-            {AUDIENCE_PROFILES.map((profile) => (
+            {AUDIENCE_PROFILES_ENHANCED.map((profile) => (
               <div
                 key={profile.label}
-                className={cn(
-                  "glass rounded-2xl p-5 text-left",
-                  "border border-white/5 hover:border-white/10 transition-colors duration-300"
-                )}
+                className={profile.className}
               >
                 <div className="h-9 w-9 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-4">
                   {ICONS[profile.icon]}
