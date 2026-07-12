@@ -10,7 +10,7 @@ export function Disclaimer() {
         <p className="text-center text-xs text-muted max-w-2xl mx-auto leading-relaxed">
           TraderAdd is built for trading review and workflow improvement. It does not
           provide financial advice or guarantee trading results.{" "}
-          <span className="text-white/50">{SITE_CONFIG.disclaimer}</span>
+          <span>{SITE_CONFIG.disclaimer}</span>
         </p>
       </div>
     </aside>
