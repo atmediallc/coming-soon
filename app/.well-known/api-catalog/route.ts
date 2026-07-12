@@ -1,23 +1,26 @@
+import { getSiteUrl } from "@/lib/site-url";
+
 export async function GET() {
+  const origin = getSiteUrl();
   const catalog = {
     linkset: [
       {
-        anchor: "https://example.com/api",
+        anchor: `${origin}/api`,
         "service-desc": [
           {
-            href: "https://example.com/openapi.yaml",
+            href: `${origin}/openapi.yaml`,
             type: "application/vnd.oai.openapi"
           }
         ],
         "service-doc": [
           {
-            href: "https://example.com/docs/api",
+            href: `${origin}/docs/api`,
             type: "text/html"
           }
         ],
         status: [
           {
-            href: "https://example.com/api/health",
+            href: `${origin}/api/health`,
             type: "application/json"
           }
         ]

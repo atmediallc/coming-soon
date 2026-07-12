@@ -8,6 +8,7 @@ import { ArrowRight, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 export function WaitlistForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState(SITE_CONFIG.errorMessage);
   const inputId = useId();
   const errorId = useId();
   const microcopyId = useId();
@@ -30,6 +31,7 @@ export function WaitlistForm() {
     e.preventDefault();
 
     if (!isValidEmail(email)) {
+      setErrorMessage(SITE_CONFIG.errorMessage);
       setStatus("error");
       return;
     }
@@ -52,6 +54,7 @@ export function WaitlistForm() {
       setStatus("success");
       setEmail("");
     } catch {
+      setErrorMessage(SITE_CONFIG.submissionErrorMessage);
       setStatus("error");
     }
   };
@@ -103,15 +106,17 @@ export function WaitlistForm() {
             type="email"
             autoComplete="email"
             spellCheck="false"
+            maxLength={254}
             placeholder="Enter your email address"
             value={email}
             onChange={handleChange}
             required
+            maxLength={254}
             disabled={status === "loading"}
             aria-invalid={status === "error" ? "true" : "false"}
             aria-describedby={status === "error" ? errorId : microcopyId}
             className={cn(
-              "w-full bg-white/5 border rounded-xl pl-4 pr-[180px] py-3.5 text-white placeholder:text-white/50 outline-none transition-all duration-300",
+              "w-full bg-white/5 border rounded-xl pl-4 pr-[180px] py-3.5 text-white placeholder:text-muted outline-none transition-all duration-300",
               "focus:bg-white/8 focus:ring-2 focus:ring-accent/50 focus:ring-offset-0",
               "disabled:opacity-50 disabled:cursor-not-allowed",
               status === "error"
@@ -152,7 +157,7 @@ export function WaitlistForm() {
             className="flex items-center space-x-1.5 mt-2.5 text-red-400 animate-fade-in"
           >
             <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-            <p className="text-xs font-medium">{SITE_CONFIG.errorMessage}</p>
+            <p className="text-xs font-medium">{errorMessage}</p>
           </div>
         )}
       </form>

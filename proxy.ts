@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const acceptHeader = request.headers.get('accept') || ''
   const isHomepage = request.nextUrl.pathname === '/' || request.nextUrl.pathname === ''
 
@@ -27,6 +27,8 @@ TraderAdd helps traders journal, review, analyze and improve their trading proce
       }
     })
   }
+
+  return NextResponse.next()
 }
 
 export const config = {

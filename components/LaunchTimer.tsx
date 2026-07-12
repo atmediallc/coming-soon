@@ -42,6 +42,7 @@ export function LaunchTimer() {
         "glass rounded-xl border border-white/8 px-4 py-3.5",
         "animate-fade-in-up [animation-delay:350ms]"
       )}
+      role="group"
       aria-label="Launch timeline"
     >
       <div className="flex items-start justify-between gap-4">
@@ -63,16 +64,18 @@ export function LaunchTimer() {
           </p>
         </div>
 
-        <div
-          className="shrink-0 text-right"
-          aria-label={`${progressPercent}% of beta preparation complete`}
-        >
-          <p className="text-[11px] font-bold text-accent tabular-nums">
-            {progressPercent}%
-          </p>
-          <p className="text-[10px] text-white/50 whitespace-nowrap">
-            {LAUNCH_CONFIG.capacityLabel}
-          </p>
+        <div className="shrink-0 text-right">
+          <span className="sr-only">
+            {progressPercent}% of beta preparation complete. {LAUNCH_CONFIG.capacityLabel}.
+          </span>
+          <div aria-hidden="true">
+            <p className="text-[11px] font-bold text-accent tabular-nums">
+              {progressPercent}%
+            </p>
+            <p className="text-[10px] text-white/30 whitespace-nowrap">
+              {LAUNCH_CONFIG.capacityLabel}
+            </p>
+          </div>
         </div>
       </div>
 

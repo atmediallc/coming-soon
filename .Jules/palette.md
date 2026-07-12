@@ -8,6 +8,11 @@
 **Learning:** When positioning elements (like buttons or icons) absolutely within an input field, the input's padding must account for the full width of the absolute element plus any margins. Otherwise, long user input will scroll behind the element, becoming unreadable and causing a frustrating user experience.
 **Action:** Always verify input padding against the width of any overlapping absolute elements to ensure text remains fully visible at all scroll positions.
 ## 2024-06-24 - External Links A11y and UX\n**Learning:** Links that open in a new tab (`target="_blank"`) should provide visual and screen-reader cues to avoid disorienting users.\n**Action:** Add an external link icon and an `<span className="sr-only"> (opens in a new tab)</span>` label to all such links to clearly communicate behavior.
-## 2026-06-25 - Low Contrast UI Text
-**Learning:** Low-opacity white text (like `text-white/20` to `text-white/40`) on a black background fails WCAG accessibility contrast ratios and reduces readability.
-**Action:** Establish `text-white/50` (or `text-muted`) as the minimum opacity for readable secondary text in this design system.
+
+## 2024-06-26 - aria-label on Generic Elements
+**Learning:** Using `aria-label` on a generic `<div>` or `<span>` without a valid role (like `group`, `region`, or `button`) is an accessibility anti-pattern. It is often ignored by screen readers, and if it is announced, it overrides the visible text content entirely, removing important context.
+**Action:** Use visually hidden text (`<span className="sr-only">`) to add context to visible text, or ensure the container has a valid `role="group"` if an `aria-label` is strictly necessary to describe a collection of elements.
+
+## 2024-07-12 - WCAG AA Contrast for Secondary Text
+**Learning:** The app used widespread low opacity text classes (`text-white/20`, `text-white/30`, `text-white/35`, `text-white/40`, `text-white/45`) which severely reduces readability and fails WCAG AA contrast ratios on dark backgrounds.
+**Action:** Avoid text opacities below 50%. Systematically use `text-white/50` or `text-muted` for secondary text and placeholders to maintain accessibility compliance without losing visual hierarchy.

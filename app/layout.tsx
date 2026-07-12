@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { WebMCP } from "@/components/WebMCP";
 
@@ -38,7 +37,6 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
-        <Analytics />
         <WebMCP />
       </body>
     </html>
