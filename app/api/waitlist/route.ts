@@ -15,7 +15,10 @@ function getStore(): WaitlistStore {
 
 export async function POST(request: Request) {
   const contentLength = request.headers.get("content-length");
-  if (contentLength && parseInt(contentLength, 10) > 1024) {
+  if (!contentLength || !/^\d+$/.test(contentLength)) {
+    return Response.json({ error: "Length Required" }, { status: 411 });
+  }
+  if (parseInt(contentLength, 10) > 1024) {
     return Response.json({ error: "Payload Too Large" }, { status: 413 });
   }
 
