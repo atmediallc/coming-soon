@@ -111,6 +111,7 @@ export function WaitlistForm() {
             value={email}
             onChange={handleChange}
             required
+            maxLength={254}
             disabled={status === "loading"}
             aria-invalid={status === "error" ? "true" : "false"}
             aria-describedby={status === "error" ? errorId : microcopyId}
