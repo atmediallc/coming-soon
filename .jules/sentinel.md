@@ -3,6 +3,16 @@
 **Learning:** Even simple forms need input length boundaries to prevent resource exhaustion.
 **Prevention:** Implement strict length limits on all user inputs, regardless of validation regex, as a defense-in-depth measure. Maximum length of an email address according to RFC 5321 is 254 characters.
 
+## 2025-02-27 - Next.js Technology Stack Disclosure
+**Vulnerability:** The application was exposing the `X-Powered-By: Next.js` header, which could help attackers identify the technology stack and target specific vulnerabilities.
+**Learning:** Next.js exposes this header by default.
+**Prevention:** Always set `poweredByHeader: false` in `next.config.ts`.
+
+## 2025-02-27 - Payload Exhaustion in Waitlist API Endpoint
+**Vulnerability:** The `/api/waitlist` endpoint parsed the JSON body before checking the `Content-Length`.
+**Learning:** Next.js API routes are vulnerable to payload exhaustion DoS attacks if they process large JSON payloads without limits.
+**Prevention:** Always enforce early `Content-Length` checks on API routes that expect small payloads.
+
 ## 2025-02-27 - CSRF Vulnerability on Waitlist API Endpoint
 **Vulnerability:** The `/api/waitlist` endpoint did not check the `Content-Type` header.
 **Learning:** Next.js API routes that process JSON payloads are vulnerable to Cross-Site Request Forgery (CSRF) if they accept simple requests (like `application/x-www-form-urlencoded` or `text/plain` from HTML forms) that bypass CORS preflight checks.
