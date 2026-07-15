@@ -1,5 +1,16 @@
 import { MOCKUP_DATA } from "@/lib/constants";
 
+// ⚡ Bolt Optimization: Hoist static array and derived string concatenations
+// to prevent recreating objects and template literals on every render.
+const RISK_METRICS = [
+  { label: "Rule adherence", valueStr: "91%", colorClass: "bg-emerald-500/60" },
+  { label: "Avg. risk / trade", valueStr: "74%", colorClass: "bg-accent/60" },
+  { label: "Overtrading alerts", valueStr: "12%", colorClass: "bg-red-500/50" },
+];
+
+const BACKTEST_WIN_RATE_FLOAT = parseFloat(MOCKUP_DATA.backtestWinRate);
+
+
 export function RightColumn() {
   return (
     <div className="hidden lg:flex col-span-3 flex-col gap-3">
@@ -17,7 +28,7 @@ export function RightColumn() {
           <div
             className="h-1 w-full bg-white/5 rounded-full overflow-hidden"
             role="meter"
-            aria-valuenow={parseFloat(MOCKUP_DATA.backtestWinRate)}
+            aria-valuenow={BACKTEST_WIN_RATE_FLOAT}
             aria-valuemin={0}
             aria-valuemax={100}
             aria-label="Backtest win rate"
@@ -44,18 +55,14 @@ export function RightColumn() {
           Risk &amp; Discipline
         </p>
         <div className="space-y-2">
-          {[
-            { label: "Rule adherence", value: 91, color: "bg-emerald-500/60" },
-            { label: "Avg. risk / trade", value: 74, color: "bg-accent/60" },
-            { label: "Overtrading alerts", value: 12, color: "bg-red-500/50" },
-          ].map((item) => (
+          {RISK_METRICS.map((item) => (
             <div key={item.label}>
               <div className="flex justify-between mb-1">
                 <span className="text-[10px] text-white/40">{item.label}</span>
-                <span className="text-[10px] font-bold text-white tabular-nums">{item.value}%</span>
+                <span className="text-[10px] font-bold text-white tabular-nums">{item.valueStr}</span>
               </div>
               <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                <div className={`h-full rounded-full ${item.color}`} style={{ width: `${item.value}%` }} />
+                <div className={`h-full rounded-full ${item.colorClass}`} style={{ width: item.valueStr }} />
               </div>
             </div>
           ))}

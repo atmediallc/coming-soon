@@ -19,6 +19,18 @@ const CANDLES = [
 
 const CANDLEWIDTH = 4;
 
+// ⚡ Bolt Optimization: Pre-calculate derived values from CANDLES outside
+// the render function to avoid doing math on every render for this static data.
+const PROCESSED_CANDLES = CANDLES.map((c) => ({
+  ...c,
+  wickStroke: c.bull ? "rgba(52,211,153,0.4)" : "rgba(248,113,113,0.4)",
+  bodyY: Math.min(c.open, c.close),
+  bodyX: c.x - CANDLEWIDTH / 2,
+  bodyHeight: Math.max(Math.abs(c.open - c.close), 1),
+  bodyFill: c.bull ? "rgba(52,211,153,0.35)" : "rgba(248,113,113,0.35)",
+  bodyWidth: CANDLEWIDTH
+}));
+
 // Calendar heat map: static intensity values (0–4 scale)
 const CALENDAR_CELLS = [
   0,1,2,0,3,1,0,
@@ -36,6 +48,13 @@ const CALENDAR_COLORS = [
   "rgba(59,130,246,0.55)",
   "rgba(59,130,246,0.75)"
 ] as const;
+
+// ⚡ Bolt Optimization: Pre-calculate calendar properties to avoid object
+// creation on every render cycle.
+const PROCESSED_CALENDAR_CELLS = CALENDAR_CELLS.map((intensity, i) => ({
+  key: i,
+  backgroundColor: CALENDAR_COLORS[intensity] || CALENDAR_COLORS[0],
+}));
 
 export function CenterColumn() {
   return (
@@ -76,22 +95,22 @@ export function CenterColumn() {
           />
 
           {/* Abstract candlesticks */}
-          {CANDLES.map((c) => (
+          {PROCESSED_CANDLES.map((c) => (
             <g key={c.x} aria-hidden="true">
               {/* Wick */}
               <line
                 x1={c.x} y1={c.high}
                 x2={c.x} y2={c.low}
-                stroke={c.bull ? "rgba(52,211,153,0.4)" : "rgba(248,113,113,0.4)"}
+                stroke={c.wickStroke}
                 strokeWidth="0.4"
               />
               {/* Body */}
               <rect
-                x={c.x - CANDLEWIDTH / 2}
-                y={Math.min(c.open, c.close)}
-                width={CANDLEWIDTH}
-                height={Math.max(Math.abs(c.open - c.close), 1)}
-                fill={c.bull ? "rgba(52,211,153,0.35)" : "rgba(248,113,113,0.35)"}
+                x={c.bodyX}
+                y={c.bodyY}
+                width={c.bodyWidth}
+                height={c.bodyHeight}
+                fill={c.bodyFill}
                 rx="0.5"
               />
             </g>
@@ -110,17 +129,13 @@ export function CenterColumn() {
           </span>
         </div>
         <div className="grid gap-0.5" style={{ gridTemplateColumns: "repeat(7, 1fr)" }} aria-hidden="true">
-          {CALENDAR_CELLS.map((intensity, i) => {
-            return (
+          {PROCESSED_CALENDAR_CELLS.map((cell) => (
               <div
-                key={i}
+                key={cell.key}
                 className="aspect-square rounded-sm"
-                style={{
-                  backgroundColor: CALENDAR_COLORS[intensity] || CALENDAR_COLORS[0],
-                }}
+                style={{ backgroundColor: cell.backgroundColor }}
               />
-            );
-          })}
+          ))}
         </div>
       </div>
     </div>
