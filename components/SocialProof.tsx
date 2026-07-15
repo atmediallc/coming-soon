@@ -48,7 +48,7 @@ export function SocialProof() {
         <div className="flex flex-col items-center text-center space-y-12">
 
           <div className="space-y-4">
-            <p className="text-xs font-bold text-white/25 uppercase tracking-[0.35em]">
+            <p className="text-xs font-bold text-muted uppercase tracking-[0.35em]">
               Who this is for
             </p>
             <h2 id="audience-heading" className="text-2xl md:text-3xl font-bold text-white tracking-tight">
@@ -70,7 +70,7 @@ export function SocialProof() {
                   {ICONS[profile.icon]}
                 </div>
                 <h3 className="text-sm font-semibold text-white mb-1.5">{profile.label}</h3>
-                <p className="text-xs text-white/45 leading-relaxed">{profile.description}</p>
+                <p className="text-xs text-muted leading-relaxed">{profile.description}</p>
               </div>
             ))}
           </div>
