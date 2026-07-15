@@ -16,3 +16,6 @@
 ## 2024-07-12 - WCAG AA Contrast for Secondary Text
 **Learning:** The app used widespread low opacity text classes (`text-white/20`, `text-white/30`, `text-white/35`, `text-white/40`, `text-white/45`) which severely reduces readability and fails WCAG AA contrast ratios on dark backgrounds.
 **Action:** Avoid text opacities below 50%. Systematically use `text-white/50` or `text-muted` for secondary text and placeholders to maintain accessibility compliance without losing visual hierarchy.
+## 2024-05-18 - Fix WCAG AA Contrast for Secondary Text
+**Learning:** We had very low contrast colors like text-white/30 and text-white/25, which fail WCAG AA guidelines.
+**Action:** Replace all instances of `text-white/[1-4][0-9]` with `text-muted` or `text-white/50` for better accessibility and readability.

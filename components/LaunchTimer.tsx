@@ -47,7 +47,7 @@ export function LaunchTimer() {
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/30 mb-1">
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted mb-1">
             {isOpen ? "" : LAUNCH_CONFIG.launchLabel}
           </p>
           <p className="text-sm font-semibold text-white leading-snug">
@@ -56,7 +56,7 @@ export function LaunchTimer() {
             ) : (
               <>
                 {LAUNCH_CONFIG.launchWindow}
-                <span className="ml-2 text-white/40 text-xs font-normal">
+                <span className="ml-2 text-muted text-xs font-normal">
                   · {days} days
                 </span>
               </>
@@ -72,7 +72,7 @@ export function LaunchTimer() {
             <p className="text-[11px] font-bold text-accent tabular-nums">
               {progressPercent}%
             </p>
-            <p className="text-[10px] text-white/30 whitespace-nowrap">
+            <p className="text-[10px] text-muted whitespace-nowrap">
               {LAUNCH_CONFIG.capacityLabel}
             </p>
           </div>
