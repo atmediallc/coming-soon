@@ -17,3 +17,8 @@
 **Vulnerability:** Next.js API routes could be vulnerable to memory exhaustion DoS attacks if they process excessively large JSON payloads without limits.
 **Learning:** `request.json()` loads the entire payload into memory before validation. Checking `Content-Length` headers early on the server and implementing `maxLength` on client-side inputs is necessary to drop oversized requests before allocating memory.
 **Prevention:** Enforce early `Content-Length` checks on Next.js API routes and `maxLength` attributes on client-side form inputs to prevent memory exhaustion and DoS attacks.
+
+## 2025-07-20 - Prevent Technology Stack Disclosure via X-Powered-By Header
+**Vulnerability:** The application was broadcasting that it is powered by Next.js in the `X-Powered-By` HTTP response header. This could assist attackers in targeting framework-specific vulnerabilities.
+**Learning:** Default configurations in frameworks often include headers that disclose information about the technology stack, which goes against the principle of defense-in-depth.
+**Prevention:** Explicitly disable the `poweredByHeader` option in `next.config.ts` (or equivalent framework configuration) to prevent emitting the `X-Powered-By` header.
