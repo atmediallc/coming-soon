@@ -106,12 +106,13 @@ export function WaitlistForm() {
             type="email"
             autoComplete="email"
             spellCheck="false"
-            maxLength={254}
+
             placeholder="Enter your email address"
+            maxLength={254}
             value={email}
             onChange={handleChange}
             required
-            maxLength={254}
+
             disabled={status === "loading"}
             aria-invalid={status === "error" ? "true" : "false"}
             aria-describedby={status === "error" ? errorId : microcopyId}
